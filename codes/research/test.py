@@ -20,7 +20,8 @@ class DPC(object):
 
     """
 
-    def __init__(self, path, datas, num=0, dc_method=0, dc_percent=1, rho_method=1, delta_method=1, use_halo=False, plot=None):
+    def __init__(self, path, datas, num=0, dc_method=0, dc_percent=1, rho_method=1, delta_method=1, use_halo=False,
+                 plot=None):
         """
         初始化函数
         Args:
@@ -93,7 +94,7 @@ class DPC(object):
             plt.show()
         else:
             '''全部数据集绘图'''
-            self.draw_cluster(cluster, halo, points, plot)
+            self.draw_cluster(cluster, halo, points, None)
 
     def distance(self, points, metric):
         """
@@ -130,7 +131,7 @@ class DPC(object):
 
         num = 0
         for i in range(max_id):
-            for j in range(i+1, max_id):
+            for j in range(i + 1, max_id):
                 dis_matrix.at[i, j] = dis_array[num]
                 dis_matrix.at[j, i] = dis_matrix.at[i, j]
                 num += 1
@@ -145,8 +146,8 @@ class DPC(object):
         """
         计算截断距离
         Args:
-            dis_array : 距离矩阵
-            dis_array_half : 上三角距离矩阵
+            dis_matrix : 距离矩阵
+            dis_array : 上三角距离矩阵
             min_dis : 最小距离
             max_dis : 最大距离
             max_id : 点数
@@ -154,14 +155,14 @@ class DPC(object):
         Returns:
             float: 截断距离
         """
-        lower = self.dc_percent/100
-        upper = (self.dc_percent+1)/100
+        lower = self.dc_percent / 100
+        upper = (self.dc_percent + 1) / 100
         if self.dc_method == 0:
             while 1:
-                dc = (min_dis+max_dis)/2
+                dc = (min_dis + max_dis) / 2
                 '''上三角矩阵'''
                 neighbors_percent = len(
-                    dis_array[dis_array < dc])/(((max_id-1)**2)/2)
+                    dis_array[dis_array < dc]) / (((max_id - 1) ** 2) / 2)
                 if neighbors_percent >= lower and neighbors_percent <= upper:
                     return dc
                 elif neighbors_percent > upper:
@@ -185,16 +186,17 @@ class DPC(object):
         for i in range(max_id):
             if self.rho_method == 0:
                 '''和点 i 距离小于 dc 的点的数量'''
-                rho[i] = len(dis_matrix.loc[i, :][dis_matrix.loc[i, :] < dc])-1
+                rho[i] = len(dis_matrix.loc[i, :][dis_matrix.loc[i, :] < dc]) - 1
             elif self.rho_method == 1:
                 '''高斯核'''
                 for j in range(max_id):
-                    rho[i] += math.exp(-(dis_matrix.at[i, j]/dc)**2)
+                    if i != j:
+                        rho[i] += math.exp(-(dis_matrix.at[i, j] / dc) ** 2)
             elif self.rho_method == 2:
                 '''排除异常值'''
-                n = int(max_id*0.05)
+                n = int(max_id * 0.05)
                 '''选择前 n 个离 i 最近的样本点'''
-                rho[i] = math.exp(-(dis_matrix.loc[i].sort_values().values[:n].sum()/(n-1)))
+                rho[i] = math.exp(-(dis_matrix.loc[i].sort_values().values[:n].sum() / (n - 1)))
 
         return rho
 
@@ -216,14 +218,14 @@ class DPC(object):
             for i in range(max_id):
                 rho_i = rho[i]
                 '''rho 大于 rho_i 的点'''
-                j_list = numpy.where(rho > rho_j)[0]
-            if len(j_list) == 0:
-                '''局部密度最大的点'''
-                delta[i] = dis_matrix.loc[i, :].max()
-            else:
-                '''局部密度大于 i 且离 i 最近点的索引'''
-                min_dis_idx = d.loc[i, j_list].idxmin()
-                delta[i] = d.at[i, min_dis_idx]
+                j_list = numpy.where(rho > rho_i)[0]
+                if len(j_list) == 0:
+                    '''局部密度最大的点'''
+                    delta[i] = dis_matrix.loc[i, :].max()
+                else:
+                    '''局部密度大于 i 且离 i 最近点的索引'''
+                    min_dis_idx = dis_matrix.loc[i, j_list].idxmin()
+                    delta[i] = dis_matrix.at[i, min_dis_idx]
         elif self.delta_method == 1:
             '''考虑 rho 相同且同为最大'''
             '''局部密度从小到大排序，并且反转，返回对应值的索引'''
@@ -256,7 +258,7 @@ class DPC(object):
             center: 聚类中心列表
             gamma: rho * delta
         """
-        gamma = rho*delta
+        gamma = rho * delta
         gamma = pandas.DataFrame(gamma, columns=['gamma']).sort_values(
             'gamma', ascending=False)
         '''取 gamma 最大的前 self.num 个点作为聚类中心'''
@@ -335,7 +337,7 @@ class DPC(object):
         all_points = set(list(range(max_id)))
         for c, points in cluster.items():
             '''属于其他聚类的点'''
-            others_points = list(set(all_points)-set(points))
+            others_points = list(set(all_points) - set(points))
             border = list()
             for p in points:
                 '''到其他聚类点的距离小于 dc'''
@@ -360,7 +362,7 @@ class DPC(object):
         for c, points in cluster.items():
             cluster_points = cluster_points | set(points)
         '''光晕点'''
-        halo = list(set(all_points)-cluster_points)
+        halo = list(set(all_points) - cluster_points)
 
         return cluster, halo
 
@@ -378,7 +380,7 @@ class DPC(object):
         if len(center) != 0:
             center_p = points.loc[center, :]
             plot.scatter(center_p.loc[:, 'x'],
-                         center_p.loc[:, 'y'], c='r', s=numpy.pi*8**2)
+                         center_p.loc[:, 'y'], c='r', s=numpy.pi * 8 ** 2)
         plot.set_title("raw data")
 
     def draw_rho_delta(self, rho, delta, center, plot):
@@ -413,7 +415,7 @@ class DPC(object):
 
         """
         gamma = pandas.DataFrame(
-            rho*delta, columns=['gamma']).sort_values('gamma', ascending=False)
+            rho * delta, columns=['gamma']).sort_values('gamma', ascending=False)
         plot.scatter(range(len(gamma)),
                      gamma.loc[:, 'gamma'], label='gamma', s=5)
         # plot.hlines(avg, 0, len(gamma), 'b', 'dashed')
@@ -441,10 +443,11 @@ class DPC(object):
             cluster_points[k] = points.loc[cluster[k], :]
             colors[k] = numpy.random.rand(3)
 
+
         for k, v in cluster_points.items():
             plot.scatter(v.loc[:, 'x'], v.loc[:, 'y'], c=colors[k], alpha=0.5)
             plot.scatter(v.at[k, 'x'], v.at[k, 'y'],
-                         c=colors[k], s=numpy.pi*8**2)
+                         c=colors[k], s=numpy.pi * 8 ** 2)
 
         if len(halo) != 0:
             noise_pointer = points.loc[halo, :]
@@ -452,5 +455,12 @@ class DPC(object):
                          noise_pointer.loc[:, 'y'], c='k')
             border_b = points.loc[self.border_b, :]
             plot.scatter(
-                border_b.loc[:, 'x'], border_b.loc[:, 'y'], c='k', s=numpy.pi*4**2)
+                border_b.loc[:, 'x'], border_b.loc[:, 'y'], c='k', s=numpy.pi * 4 ** 2)
         plot.set_title(self.data_name)
+
+
+if __name__ == "__main__":
+    """"""
+    p = "../../dataSet/test.dat"
+    d = DPC(p, "test", num=3)
+    d.cluster()
