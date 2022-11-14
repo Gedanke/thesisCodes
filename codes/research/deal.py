@@ -5,10 +5,10 @@ import sys
 import numpy
 import pandas
 import matplotlib.pyplot as plt
-from test import DPC
 from sklearn.metrics.cluster import *
 from sklearn.metrics import *
 from dpc import *
+from test import *
 
 PATH = "../../dataSet/"
 DATAS = ['test.dat']
@@ -16,19 +16,27 @@ DATAS = ['test.dat']
 
 def deal_data():
     """
-
+    数据调整
     Returns
     -------
 
     """
-    files = os.listdir(PATH)
+    files = os.listdir(PATH + "raw/")
     for file in files:
-        data_path = PATH + file
+        '''文件路径'''
+        data_path = PATH + "raw/" + file
         data_title = os.path.splitext(file)[0]
-        print(data_path)
+        '''读取数据'''
+        data = pandas.read_csv(data_path, sep="\t")
+        '''获取列名'''
+        columns_name = list(data.columns)
+        '''将第一列列名修改为 x，第一列列名修改为 y，最后一列列名修改为 num'''
+        data = data.rename(columns={columns_name[0]: "x", columns_name[1]: "y", columns_name[-1]: "num"})
+        '''保存结果'''
+        data.to_csv(PATH + "data/" + data_title + ".csv", index=False)
 
 
-def show_data():
+def show_data_():
     """
     """
     files = os.listdir(PATH)
@@ -53,11 +61,4 @@ def show_data():
 
 if __name__ == "__main__":
     """"""
-    # show_data()
-    # dpc = DPC(PATH+DATAS[0], DATAS[0], num=3, dc_percent=4)
-    # dpc.cluster()
-    # cluster_result_supervised_test()
-    # cluster_result_unsupervised_test()
-    # helper()
-    # p = PATH+DATAS[0]
     deal_data()
