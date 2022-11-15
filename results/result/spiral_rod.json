@@ -1,0 +1,20 @@
+{
+  "davies_bouldin": 1.3672357482805915,
+  "calinski_harabasz": 84.46181050256826,
+  "silhouette_coefficient": 0.10025814946915623,
+  "cluster_acc": 0.5064102564102564,
+  "rand_index": 0.5616291532690246,
+  "adjusted_rand_index": 0.06157194530406881,
+  "mutual_info": 0.11326754573669945,
+  "normalized_mutual_info": 0.10927815220692892,
+  "adjusted_mutual_info": 0.10366162901358307,
+  "homogeneity": 0.10312089829902733,
+  "completeness": 0.11621738529732582,
+  "v_measure": 0.10927815220692891,
+  "homogeneity_completeness_v_measure": [
+    0.10312089829902733,
+    0.11621738529732582,
+    0.10927815220692891
+  ],
+  "fowlkes-mallows_index": 0.40459531501402607
+}
