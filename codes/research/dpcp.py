@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-import math
-
-import numpy
 
 from dpc import *
 

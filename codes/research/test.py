@@ -153,14 +153,14 @@ def get_noise_data_():
     # plt.show()
 
     '''模拟分类数据集'''
-    # data, label = make_classification(n_samples=500, n_features=20, n_informative=2,
-    #                                   n_redundant=2, n_repeated=0, n_classes=2,
-    #                                   n_clusters_per_class=2, weights=None,
-    #                                   flip_y=0.01, class_sep=1.0, hypercube=True,
-    #                                   shift=0.0, scale=1.0, shuffle=True, random_state=None)
-    # '''共 20 个特征维度，此处仅使用两个维度作图演示'''
-    # plt.scatter(data[:, 0], data[:, 1], c=label, s=7)
-    # plt.show()
+    data, label = make_classification(n_samples=500, n_features=20, n_informative=2,
+                                      n_redundant=2, n_repeated=0, n_classes=2,
+                                      n_clusters_per_class=2, weights=None,
+                                      flip_y=0.01, class_sep=1.0, hypercube=True,
+                                      shift=0.0, scale=1.0, shuffle=True, random_state=None)
+    '''共 20 个特征维度，此处仅使用两个维度作图演示'''
+    plt.scatter(data[:, 0], data[:, 1], c=label, s=7)
+    plt.show()
 
     '''太极型非凸集样本点'''
     # data, label = make_moons(n_samples=1500, shuffle=True, noise=0.06, random_state=None)
@@ -181,7 +181,7 @@ def get_noise_data_():
     # data, label = make_swiss_roll(n_samples=2000, noise=0.1)
     # fig = plt.figure()
     # ax = fig.add_subplot(111, projection='3d')
-    # ax.scatter(data[:, 0], data[:, 1], data[:, 2], c=label, cmap=plt.cm.Spectral, edgecolors='black')
+    # ax.scatter(data[:, 0], data[:, 1], c=label, cmap=plt.cm.Spectral, edgecolors='black')
     # plt.show()
 
     ''''''
@@ -218,4 +218,5 @@ def add_noise_():
 
 if __name__ == "__main__":
     """"""
-    get_noise_data({"noise": 0.15})
+    # get_noise_data({"noise": 0.15})
+    get_noise_data_()
