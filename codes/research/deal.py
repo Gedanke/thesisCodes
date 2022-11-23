@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import random
-
-import numpy
-import pandas
-
 from dpcp import *
 from sklearn.datasets import *
 from sklearn.preprocessing import StandardScaler
@@ -312,27 +308,20 @@ class LoadData:
         '''保存数据'''
         data.to_csv(path, index=False)
 
+    def param_data_mnist(self):
+        """
+        处理 data 文件夹下的 mnist 文件夹下的数据集
+        Returns
+        -------
 
-if __name__ == "__main__":
-    """"""
-    p = "../../dataSet/"
-    param = {
-        "norm": 0,
-        "mu": 0,
-        "sigma": 0.7,
-        "make": {
-            "samples": 12,
-            "features": 10,
-            "classes": 5,
-            "noise": 0.15,
-            "random": 3
-        }
-    }
+        """
 
-    ld = LoadData(p, param)
-    '''test'''
-    # ld.deal_raw_demo()
-    # ld.deal_raw_mnist()
-    # ld.deal_raw_uci()
-    # ld.param_data_demo()
-    ld.param_data_build()
+    def param_data_uci(self):
+        """
+        处理 data 文件夹下的 uci 文件夹下的数据集
+        Returns
+        -------
+
+        """
+
+

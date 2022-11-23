@@ -10,9 +10,6 @@ import scipy.cluster.hierarchy as sch
 from sklearn.metrics import *
 from munkres import Munkres
 
-'''保存聚类图表结果的路径'''
-SAVE_PATH = "../../results/"
-
 '''sch.distance.pdist 中提供的方法'''
 metric_way_set = {
     "braycurtis", "canberra", "chebyshev", "cityblock", "correlation", "cosine", "dice", "euclidean", "hamming",
@@ -39,25 +36,29 @@ class DPC:
     即学位论文中三个方向会对应着不同的子类
     """
 
-    def __init__(self, path, use_cols=None, num=0, dc_method=0, dc_percent=1, rho_method=1, delta_method=1,
-                 use_halo=False, plot=None):
+    def __init__(self, path, save_path="../../results/", use_cols=None, num=0, dc_method=0, dc_percent=1,
+                 rho_method=1, delta_method=1, distance_method='euclidean', use_halo=False, plot=None):
         """
         初始化相关成员
         Parameters
         ----------
         path: 文件完整路径，csv 文件，如果是图片，也统一转化为 csv 储存像素点
+        save_path: 保存结果的路径
         use_cols: 使用的列，两个属性(不含标签列)指定与否都可以；超过两列则需要指定读取的列(是否包含标签列)
         num: 聚类类簇数
         dc_method: 截断距离计算方法
         dc_percent: 截断距离百分比数
         rho_method: 局部密度计算方法
         delta_method: 相对距离计算方法
+        distance_method: 度量方式
         use_halo: 是否计算光晕点
         plot: 绘图句柄，仅有两个属性的数据集才可以做出数据原始结构图和聚类结果图
         """
         '''构造函数中的相关参数'''
         '''文件完整路径'''
         self.path = path
+        '''保存结果文件的路径'''
+        self.save_path = save_path
         '''从文件路径中获取文件名(不含后缀)'''
         self.data_name = os.path.splitext(os.path.split(self.path)[-1])[0]
         '''使用的列。若为两列，做四个结果图；否则做两个图'''
@@ -75,6 +76,8 @@ class DPC:
         self.rho_method = rho_method
         '''相对距离计算方法'''
         self.delta_method = delta_method
+        '''距离度量方式'''
+        self.distance_method = distance_method
         '''是否计算光晕点'''
         self.use_halo = use_halo
         '''绘图句柄'''
@@ -116,16 +119,22 @@ class DPC:
         self.init_points_msg()
         '''获取数据集其他相关的成员信息：距离矩阵，距离列表，最小距离，最大距离'''
         dis_array, min_dis, max_dis = self.load_points_msg()
+        # print(dis_array)
         '''计算截断距离 dc'''
         dc = self.get_dc(dis_array, min_dis, max_dis)
+        # print(dc)
         '''计算局部密度 rho'''
         rho = self.get_rho(dc)
+        # print(rho)
         '''计算相对距离 delta'''
         delta = self.get_delta(rho)
+        # print(delta)
         '''确定聚类中心，计算 gamma(局部密度于相对距离的乘积)'''
         center, gamma = self.get_center(rho, delta)
+        # print(center)
         '''非聚类中心样本点分配'''
         cluster_result = self.assign(rho, center)
+        # print(cluster_result)
         '''光晕点'''
         halo = list()
         if self.use_halo:
@@ -479,7 +488,7 @@ class DPC:
                 '''第四张图，聚类结果图'''
                 self.draw_cluster(cluster_result, halo, axes[1][1])
                 '''保存图片'''
-                plt.savefig(SAVE_PATH + "plot/" + self.data_name + ".svg")
+                plt.savefig(self.save_path + "plot/" + self.data_name + "__" + self.distance_method + ".svg")
                 plt.show()
             else:
                 '''多个属性，多维数据不能直接可视化，做两个图即可'''
@@ -491,7 +500,7 @@ class DPC:
                 '''第二张图，gamma'''
                 self.draw_gamma(rho * delta, axes[1])
                 '''保存图片'''
-                plt.savefig(SAVE_PATH + "plot/" + self.data_name + ".svg")
+                plt.savefig(self.save_path + "plot/" + self.data_name + "__" + self.distance_method + ".svg")
                 plt.show()
         else:
             '''指定了绘图句柄，多个数据集绘图，只绘制聚类结果图'''
@@ -665,7 +674,8 @@ class DPC:
         '''预测的结果放在 save_samples 的 num 列(新加)'''
         save_samples["num"] = self.label_pred
         '''保存结果'''
-        save_samples.to_csv(SAVE_PATH + "data/" + self.data_name + ".csv", index=False)
+        save_samples.to_csv(self.save_path + "data/" + self.data_name + "__" + self.distance_method + ".csv",
+                            index=False)
 
     def show_result(self):
         """
@@ -747,7 +757,8 @@ class DPC:
             save_data.update(self.cluster_result_supervised)
 
         '''所有结果并保存到 json 文件中'''
-        with open(SAVE_PATH + "result/" + self.data_name + ".json", "w", encoding="utf-8") as f:
+        with open(self.save_path + "result/" + self.data_name + "__" + self.distance_method + ".json", "w",
+                  encoding="utf-8") as f:
             f.write(json.dumps(save_data, ensure_ascii=False))
 
 

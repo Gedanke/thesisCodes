@@ -14,8 +14,8 @@ class IDPC(DPC):
     并增加了一些其他度量方式进行对比、其他方法基本上保存一致
     """
 
-    def __init__(self, path, use_cols=None, num=0, dc_method=0, dc_percent=1, rho_method=1, delta_method=1,
-                 distance_method='euclidean', params=None, use_halo=False, plot=None):
+    def __init__(self, path, save_path="../../results/", use_cols=None, num=0, dc_method=0, dc_percent=1,
+                 rho_method=1, delta_method=1, distance_method='euclidean', params=None, use_halo=False, plot=None):
         """
         初始化相关成员
         Parameters
@@ -28,18 +28,18 @@ class IDPC(DPC):
         rho_method: 局部密度计算方法
         delta_method: 相对距离计算方法
         distance_method: 距离度量方式
+        params: 参数集合
         use_halo: 是否计算光晕点
         plot: 绘图句柄，仅有两个属性的数据集才可以做出数据原始结构图和聚类结果图
         """
         '''使用父类的构造方法'''
-        super(IDPC, self).__init__(path, use_cols, num, dc_method, dc_percent, rho_method, delta_method, use_halo, plot)
+        super(IDPC, self).__init__(path, save_path, use_cols, num, dc_method, dc_percent, rho_method,
+                                   delta_method, distance_method, use_halo, plot)
 
         '''其他参数'''
         if params is None:
             params = {}
         self.params = params
-        '''距离度量方式'''
-        self.distance_method = distance_method
 
     def load_points_msg(self):
         """
@@ -128,8 +128,9 @@ class IDPC(DPC):
         num = 0
         for i in range(self.samples_num):
             for j in range(i + 1, self.samples_num):
+                ''''''
                 '''用新的度量方式得到的样本间距离覆盖掉 dis_array'''
-                dis_array[num] = self.rods_fun(rank_order_table[i, :], rank_order_table[j, :])
+                dis_array[num] = self.rods_fun(i, j, rank_order_table, euclidean_table)
                 '''self.dis_matrix 内存放样本间的距离'''
                 self.dis_matrix.at[i, j] = dis_array[num]
                 '''处理对角元素'''
@@ -143,18 +144,24 @@ class IDPC(DPC):
 
         return dis_array, min_dis, max_dis
 
-    def rods_fun(self, x1, x2):
+    def rods_fun(self, i, j, rank_order_table, euclidean_table):
         """
         rod 及其改进算法
         Parameters
         ----------
-        x1: 样本 1
-        x2: 样本 2
+        i: 第 i 个样本
+        j: 第 j 个样本
+        rank_order_table: 排序距离表
+        euclidean_table: 欧式距离表
 
         Returns
         -------
         res: x1 与 x2 之间的距离
         """
+        '''第 i 个样本'''
+        x1 = rank_order_table[i, :]
+        '''第 j 个样本'''
+        x2 = rank_order_table[j, :]
         '''x1 与 x2 之间的距离'''
         res = -1
 
@@ -186,7 +193,7 @@ class IDPC(DPC):
             '''改进 rod'''
             l_a_b = o_a_b + o_b_a
             '''高斯核'''
-            k_a_b = math.exp(-sum(((x1 - x2) / self.params["mu"]) ** 2))
+            k_a_b = math.exp(-(euclidean_table.at[i, j] / self.params["mu"]) ** 2)
             '''krod，改进 rod 与高斯核相结合'''
             res = l_a_b / k_a_b
         elif self.distance_method == "irod":
@@ -197,6 +204,7 @@ class IDPC(DPC):
             '''求交集'''
             intersection = numpy.intersect1d(slice_a_b, slice_b_a, assume_unique=True, return_indices=True)
             '''结果'''
-            res = (sum(intersection[1]) + sum(intersection[2])) / math.exp(-sum(((x1 - x2) / self.params["mu"]) ** 2))
+            res = (sum(intersection[1]) + sum(intersection[2])) / math.exp(
+                -(euclidean_table.at[i, j] / self.params["mu"]) ** 2)
 
         return res
