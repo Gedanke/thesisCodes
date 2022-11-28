@@ -1,16 +1,10 @@
 # -*- coding: utf-8 -*-
 
+import os
 import random
-from dpcp import *
-from sklearn.datasets import *
+import pandas
 from sklearn.preprocessing import StandardScaler
-
-'''自建数据集目录'''
-
-make_data_set = {
-    "blobs", "circles", "classification", "moons", "gaussian_quantiles",
-    "hastie_10_2", "swiss_roll"
-}
+from scipy.io import loadmat
 
 
 class LoadData:
@@ -50,7 +44,7 @@ class LoadData:
         new_data: 返回处理后的数据
         """
         '''处理后的数据'''
-        new_data = None
+        new_data = data
 
         if self.parameters["norm"] == 1:
             '''归一化'''
@@ -85,13 +79,19 @@ class LoadData:
             data = pandas.read_csv(file_path, sep="\t")
             '''获取列名'''
             columns_name = list(data.columns)
-            '''将第一列列名修改为 x，第一列列名修改为 y，最后一列列名修改为 num'''
+            '''将第一列列名修改为 x，第一列列名修改为 y'''
             data = data.rename(columns={columns_name[0]: "x", columns_name[1]: "y", columns_name[-1]: "num"})
             '''对数据归一化处理'''
             if self.parameters["norm"] != 0:
-                data = self.normalized(data)
+                new_data = self.normalized(data[columns_name[0:-1]])
+                if len(columns_name) > 2:
+                    '''最后一列列名修改为 num'''
+                    new_data["num"] = data[columns_name[-1]]
+            else:
+                new_data = data
+
             '''保存结果'''
-            data.to_csv(self.path + "data/demo/" + file_name + ".csv", index=False)
+            new_data.to_csv(self.path + "data/demo/" + file_name + ".csv", index=False)
 
     def deal_raw_mnist(self):
         """
@@ -119,7 +119,21 @@ class LoadData:
 
         for dir_name in dirs:
             '''文件路径'''
-            file_path = deal_path + dir_name + "/" + dir_name + ".data"
+            file_path = deal_path + dir_name + "/" + dir_name + ".mat"
+            '''加载数据集'''
+            mat = loadmat(file_path)
+            '''样本数量与特征个数'''
+            samples_num, features_num = mat["X"].shape
+            '''数据集'''
+            data = pandas.DataFrame(mat["X"], columns=list(range(features_num)))
+            '''归一化数据'''
+            data = self.normalized(data)
+            '''标签'''
+            data["label"] = [
+                _[0] for _ in mat["Y"].tolist()
+            ]
+            '''保存结果'''
+            data.to_csv(self.path + "/data/uci/" + dir_name + "/" + dir_name + ".csv", index=False)
 
     def param_data_demo(self):
         """
@@ -141,7 +155,7 @@ class LoadData:
             '''读取数据'''
             data = pandas.read_csv(file_path)
             '''判断高斯噪声的两个参数是否存在'''
-            if "mu" in self.parameters and "sigma" in self.parameters:
+            if "gmu" in self.parameters and "sigma" in self.parameters:
                 '''返回增加了噪声的数据'''
                 data = self.add_noise(data)
             '''保存结果'''
@@ -169,7 +183,7 @@ class LoadData:
         for i in range(num):
             for j in col:
                 '''添加高斯噪声'''
-                noise_data.at[i, j] += random.gauss(self.parameters["mu"], self.parameters["sigma"])
+                noise_data.at[i, j] += random.gauss(self.parameters["gmu"], self.parameters["sigma"])
 
         return noise_data
 
@@ -198,115 +212,13 @@ class LoadData:
         '''加上文件名'''
         res += file_name
         '''param 字典参数拼接'''
-        res += "__norm_" + str(self.parameters["norm"])
-        res += "__mu_" + str(self.parameters["mu"])
-        res += "__sigma_" + str(self.parameters["sigma"])
+        res += "__n_" + str(self.parameters["norm"])
+        res += "__m_" + str(self.parameters["gmu"])
+        res += "__s_" + str(self.parameters["sigma"])
         '''加上文件后缀'''
         res += file_type
 
         return res
-
-    def param_data_build(self):
-        """
-        自建一些数据集
-        shuffle 统一设置成 False
-        Returns
-        -------
-
-        """
-        '''生成符合正态分布数据'''
-        data, label = make_blobs(n_samples=self.parameters["make"]["samples"],
-                                 n_features=self.parameters["make"]["features"],
-                                 centers=self.parameters["make"]["classes"], shuffle=False,
-                                 random_state=self.parameters["make"]["random"])
-        '''保存结果'''
-        self.save_param_data(data, label, "blobs",
-                             "__s_" + str(self.parameters["make"]["samples"]) +
-                             "__f_" + str(self.parameters["make"]["features"]) +
-                             "__c_" + str(self.parameters["make"]["classes"]) +
-                             "__r_" + str(self.parameters["make"]["random"]))
-
-        '''生成同心圆样本点'''
-        data, label = make_circles(n_samples=self.parameters["make"]["samples"], shuffle=False,
-                                   noise=self.parameters["make"]["noise"],
-                                   random_state=self.parameters["make"]["random"])
-
-        '''保存结果'''
-        self.save_param_data(data, label, "circles",
-                             "__s_" + str(self.parameters["make"]["samples"]) +
-                             "__n_" + str(self.parameters["make"]["noise"]) +
-                             "__r_" + str(self.parameters["make"]["random"]))
-
-        '''生成太极型非凸集样本点'''
-        data, label = make_moons(n_samples=self.parameters["make"]["samples"], shuffle=False,
-                                 noise=self.parameters["make"]["noise"],
-                                 random_state=self.parameters["make"]["random"])
-        '''保存结果'''
-        self.save_param_data(data, label, "moons",
-                             "__s_" + str(self.parameters["make"]["samples"]) +
-                             "__n_" + str(self.parameters["make"]["noise"]) +
-                             "__r_" + str(self.parameters["make"]["random"]))
-
-        '''生成同心圆形样本点'''
-        data, label = make_gaussian_quantiles(n_samples=self.parameters["make"]["samples"],
-                                              n_features=self.parameters["make"]["features"],
-                                              n_classes=self.parameters["make"]["classes"], shuffle=False,
-                                              random_state=self.parameters["make"]["random"])
-        '''保存结果'''
-        self.save_param_data(data, label, "gaussian_quantiles",
-                             "__s_" + str(self.parameters["make"]["samples"]) +
-                             "__f_" + str(self.parameters["make"]["features"]) +
-                             "__c_" + str(self.parameters["make"]["classes"]) +
-                             "__r_" + str(self.parameters["make"]["random"]))
-
-        '''生成二进制分类数据'''
-        data, label = make_hastie_10_2(n_samples=self.parameters["make"]["samples"],
-                                       random_state=self.parameters["make"]["random"])
-        '''保存结果'''
-        self.save_param_data(data, label, "hastie_10_2",
-                             "__s_" + str(self.parameters["make"]["samples"]) +
-                             "__r_" + str(self.parameters["make"]["random"]))
-
-    def save_param_data(self, data, label, dir_name, suffix):
-        """
-        合并 data 和 label 为一个 csv 文件并写入到指定文件夹下
-        Parameters
-        ----------
-        data: 数据集
-        label: 标签列
-        dir_name: 文件名
-        suffix: 后缀
-
-        Returns
-        -------
-
-        """
-        '''文件路径'''
-        path = self.path + "experiment/build/" + dir_name + "/"
-        '''判断路径是否存在'''
-        if not os.path.isdir(path):
-            '''创建文件夹'''
-            os.mkdir(path)
-
-        '''文件名拼接'''
-        path += dir_name + suffix + ".csv"
-
-        '''data 保存为 pandas.DataFrame'''
-        col = list(range(self.parameters["make"]["features"]))
-
-        if dir_name in {"circles", "moons"}:
-            '''只有两个属性'''
-            col = list(range(2))
-        elif dir_name == "hastie_10_2":
-            '''只有十个属性'''
-            col = list(range(10))
-
-        data = pandas.DataFrame(data, columns=col)
-        '''添加标签列'''
-        data["num"] = label
-
-        '''保存数据'''
-        data.to_csv(path, index=False)
 
     def param_data_mnist(self):
         """
@@ -315,6 +227,10 @@ class LoadData:
         -------
 
         """
+        '''处理 mnist 文件下的数据'''
+        deal_path = self.path + "data/mnist/"
+        '''该文件夹下的所有文件'''
+        files = os.listdir(deal_path)
 
     def param_data_uci(self):
         """
@@ -323,5 +239,15 @@ class LoadData:
         -------
 
         """
+        '''处理 uci 文件下的数据'''
+        deal_path = self.path + "data/uci/"
+        '''该文件夹下的所有文件'''
+        dirs = os.listdir(deal_path)
 
-
+        for dir_name in dirs:
+            '''文件路径'''
+            file_path = deal_path + dir_name + "/" + dir_name + ".csv"
+            '''读取数据'''
+            data = pandas.read_csv(file_path)
+            '''保存结果'''
+            data.to_csv(self.path + "/experiment/uci/" + dir_name + "/" + dir_name + ".csv", index=False)

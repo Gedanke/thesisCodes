@@ -24,8 +24,6 @@ def run_algorithm():
     -------
 
     """
-    '''experiment 下的 build 文件夹'''
-
     '''experiment 下的 demo 文件夹'''
     run_demo()
 
@@ -67,8 +65,4 @@ def helper(dir_name):
 
 if __name__ == "__main__":
     """"""
-    p = "../../dataSet/"
-
-    # ld = LoadData(p, param)
-    # ld.param_data_build()
-    # ld.param_data_demo()
+    p = "../../dataSet/raw/uci"

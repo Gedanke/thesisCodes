@@ -5,11 +5,13 @@ import math
 import json
 import numpy
 import pandas
+import matplotlib
 import matplotlib.pyplot as plt
 import scipy.cluster.hierarchy as sch
-from sklearn.metrics import *
+from sklearn.metrics.cluster import *
 from munkres import Munkres
 
+matplotlib.use('Agg')
 '''sch.distance.pdist 中提供的方法'''
 metric_way_set = {
     "braycurtis", "canberra", "chebyshev", "cityblock", "correlation", "cosine", "dice", "euclidean", "hamming",
@@ -20,8 +22,8 @@ metric_way_set = {
 
 class DPC:
     """
-    经典 DPC 算法基类，()中是 原始 DPC 算法的中采用的方法：
-    加载数据(统一为 csv 格式，第一列列名为 x，第二列列名为 y，若存在标签，最后一列为标签，列名为 num)
+    经典 DPC 算法基类，() 中是 原始 DPC 算法中采用的方法以及代码的处理方法：
+    加载数据(统一为 csv 格式，最后一列为标签，列名为 num，其他列无特殊情况以数字区分不同属性)
     计算距离矩阵(默认是欧式距离，可以用其他度量方式)
     对于距离矩阵(很多改进的度量方法需要欧式距离矩阵过渡，此处的矩阵度量方式以后续需要的类型为准)
     计算截断距离(DPC 论文中的方法)、计算局部密度(根据距离矩阵)
@@ -32,8 +34,7 @@ class DPC:
     得到聚类结果表(统计外部评价指标，根据情况统计内部评价指标)
 
     该类为基类，具有可扩展性，无需考虑改进或者重写的方法，实现对应的方法即可
-    部分方法(但不是抽象方法)会在不同子类中重新继承实现，对应学位论文中不同的创新点
-    即学位论文中三个方向会对应着不同的子类
+    部分方法(但不是抽象方法)会在不同子类中重新继承实现
     """
 
     def __init__(self, path, save_path="../../results/", use_cols=None, num=0, dc_method=0, dc_percent=1,
@@ -100,9 +101,10 @@ class DPC:
         self.dis_matrix = pandas.DataFrame({})
         '''外部指标，不需要列标签'''
         self.cluster_result_unsupervised = {
+            "center": [],
             "davies_bouldin": 0.0,
             "calinski_harabasz": 0.0,
-            "silhouette_coefficient": 0.0
+            "silhouette_coefficient": 0.0,
         }
         '''内部指标，需要列标签'''
         self.cluster_result_supervised = dict()
@@ -119,29 +121,26 @@ class DPC:
         self.init_points_msg()
         '''获取数据集其他相关的成员信息：距离矩阵，距离列表，最小距离，最大距离'''
         dis_array, min_dis, max_dis = self.load_points_msg()
-        # print(dis_array)
         '''计算截断距离 dc'''
         dc = self.get_dc(dis_array, min_dis, max_dis)
-        # print(dc)
         '''计算局部密度 rho'''
         rho = self.get_rho(dc)
-        # print(rho)
         '''计算相对距离 delta'''
         delta = self.get_delta(rho)
-        # print(delta)
         '''确定聚类中心，计算 gamma(局部密度于相对距离的乘积)'''
         center, gamma = self.get_center(rho, delta)
-        # print(center)
+
+        '''保存聚类中心'''
+        self.cluster_result_unsupervised["center"] = center.tolist()
         '''非聚类中心样本点分配'''
         cluster_result = self.assign(rho, center)
-        # print(cluster_result)
         '''光晕点'''
         halo = list()
         if self.use_halo:
             cluster_result, halo = self.get_halo(rho, cluster_result, dc)
 
         '''绘图结果'''
-        self.show_plot(rho, delta, center, cluster_result, halo)
+        # self.show_plot(rho, delta, center, cluster_result, halo)
 
         '''得到聚类结果并写入到 csv 文件中'''
         self.gain_label_pred(cluster_result.copy())
@@ -247,7 +246,14 @@ class DPC:
                     max_dis = dc
                 elif neighbors_percent < lower:
                     min_dis = dc
-        '''如果对截断距离计算有所改进，可以直接重写该方法'''
+        elif self.dc_method == 1:
+            '''如果对截断距离计算有所改进，可以直接重写该方法'''
+            dis_array_ = dis_array.copy()
+            dis_array_.sort()
+            '''取第 self.dc_percent 个距离作为截断距离'''
+            dc = dis_array_[int(float(self.dc_percent / 100.0) * self.samples_num * (self.samples_num - 1) / 2)]
+
+            return dc
 
     def get_rho(self, dc):
         """
@@ -488,8 +494,8 @@ class DPC:
                 '''第四张图，聚类结果图'''
                 self.draw_cluster(cluster_result, halo, axes[1][1])
                 '''保存图片'''
-                plt.savefig(self.save_path + "plot/" + self.data_name + "__" + self.distance_method + ".svg")
-                plt.show()
+                plt.savefig(self.get_file_path("plot"))
+                # plt.show()
             else:
                 '''多个属性，多维数据不能直接可视化，做两个图即可'''
                 fig, axes = plt.subplots(1, 2, figsize=(18, 9))
@@ -500,8 +506,8 @@ class DPC:
                 '''第二张图，gamma'''
                 self.draw_gamma(rho * delta, axes[1])
                 '''保存图片'''
-                plt.savefig(self.save_path + "plot/" + self.data_name + "__" + self.distance_method + ".svg")
-                plt.show()
+                plt.savefig(self.get_file_path("plot"))
+                # plt.show()
         else:
             '''指定了绘图句柄，多个数据集绘图，只绘制聚类结果图'''
             self.draw_cluster(cluster_result, halo, self.plot)
@@ -642,7 +648,7 @@ class DPC:
 
     def gain_label_pred(self, cluster_result):
         """
-
+        获聚类标签
         Parameters
         ----------
         cluster_result
@@ -669,13 +675,12 @@ class DPC:
                 self.label_pred[point] = label_true_list[idx]
             idx += 1
 
-        '''深拷贝一份'''
-        save_samples = self.samples.copy()
-        '''预测的结果放在 save_samples 的 num 列(新加)'''
+        '''只保存标签列'''
+        save_samples = dict()
         save_samples["num"] = self.label_pred
         '''保存结果'''
-        save_samples.to_csv(self.save_path + "data/" + self.data_name + "__" + self.distance_method + ".csv",
-                            index=False)
+        save_samples = pandas.DataFrame(save_samples)
+        save_samples.to_csv(self.get_file_path("data"), index=False)
 
     def show_result(self):
         """
@@ -743,8 +748,9 @@ class DPC:
             print("调和平均为：" + str(self.cluster_result_supervised["v_measure"]))
 
             '''融合了同质性、完整性、调和平均'''
-            self.cluster_result_supervised["homogeneity_completeness_v_measure"] = homogeneity_completeness_v_measure(
-                self.label_true, self.label_pred)
+            self.cluster_result_supervised[
+                "homogeneity_completeness_v_measure"] = homogeneity_completeness_v_measure(self.label_true,
+                                                                                           self.label_pred)
             print("融合了同质性、完整性、调和平均为：" + str(
                 self.cluster_result_supervised["homogeneity_completeness_v_measure"]))
 
@@ -757,9 +763,41 @@ class DPC:
             save_data.update(self.cluster_result_supervised)
 
         '''所有结果并保存到 json 文件中'''
-        with open(self.save_path + "result/" + self.data_name + "__" + self.distance_method + ".json", "w",
-                  encoding="utf-8") as f:
+        with open(self.get_file_path("result"), "w", encoding="utf-8") as f:
             f.write(json.dumps(save_data, ensure_ascii=False))
+
+    def get_file_path(self, dir_type):
+        """
+        保存文件路径
+        Parameters
+        ----------
+        dir_type: 要保存的文件夹(data，plot，result)
+
+        Returns
+        -------
+        path: 保存结果文件的路径
+        """
+        '''保存文件路径'''
+        path = self.save_path + dir_type + "/" + self.data_name + "_" + self.distance_method + "/"
+
+        '''判断文件夹是否存在'''
+        if not os.path.isdir(path):
+            '''创建文件夹'''
+            os.mkdir(path)
+
+        '''由于已经创建了以该文件名命名的文件夹，对于文件名只需要添加相关参数'''
+        path += "dcm_" + str(self.dc_method) + "__dcp_" + str(self.dc_percent) + \
+                "__rho_" + str(self.rho_method) + "__dem_" + str(self.delta_method) + "__ush_" + str(int(self.use_halo))
+
+        '''根据不同的文件夹类型保存不同类型的文件'''
+        if dir_type == "data":
+            path += ".csv"
+        elif dir_type == "plot":
+            path += ".svg"
+        else:
+            path += ".json"
+
+        return path
 
 
 def cluster_acc(label_true, label_pred):

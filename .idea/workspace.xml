@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d309d47c-83a3-462c-a361-c6266b368ab3" name="Changes" comment="deal ++">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/thesisCodes.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codes/research/deal.py" beforeDir="false" afterPath="$PROJECT_DIR$/codes/research/deal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codes/research/dpc.py" beforeDir="false" afterPath="$PROJECT_DIR$/codes/research/dpc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codes/research/dpcp.py" beforeDir="false" afterPath="$PROJECT_DIR$/codes/research/dpcp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codes/research/dpcs.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/codes/research/experiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/codes/research/experiment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codes/research/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/codes/research/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/D31/D31__norm_0__mu_0__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/D31/D31__norm_0__mu_1000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/D31/D31__norm_0__mu_100__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/D31/D31__norm_0__mu_10__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/D31/D31__norm_0__mu_1__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/D31/D31__norm_0__mu_2000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/D31/D31__norm_0__mu_200__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/D31/D31__norm_0__mu_30__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/D31/D31__norm_0__mu_500__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/R15/R15__norm_0__mu_0__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/R15/R15__norm_0__mu_1000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/R15/R15__norm_0__mu_100__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/R15/R15__norm_0__mu_10__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/R15/R15__norm_0__mu_1__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/R15/R15__norm_0__mu_2000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/R15/R15__norm_0__mu_200__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/R15/R15__norm_0__mu_30__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/R15/R15__norm_0__mu_500__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/aggregation/aggregation__norm_0__mu_0__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/aggregation/aggregation__norm_0__mu_1000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/aggregation/aggregation__norm_0__mu_100__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/aggregation/aggregation__norm_0__mu_10__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/aggregation/aggregation__norm_0__mu_1__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/aggregation/aggregation__norm_0__mu_2000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/aggregation/aggregation__norm_0__mu_200__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/aggregation/aggregation__norm_0__mu_30__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/aggregation/aggregation__norm_0__mu_500__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/compound/compound__norm_0__mu_0__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/compound/compound__norm_0__mu_1000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/compound/compound__norm_0__mu_100__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/compound/compound__norm_0__mu_10__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/compound/compound__norm_0__mu_1__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/compound/compound__norm_0__mu_2000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/compound/compound__norm_0__mu_200__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/compound/compound__norm_0__mu_30__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/compound/compound__norm_0__mu_500__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/flame/flame__norm_0__mu_0__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/flame/flame__norm_0__mu_1000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/flame/flame__norm_0__mu_100__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/flame/flame__norm_0__mu_10__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/flame/flame__norm_0__mu_1__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/flame/flame__norm_0__mu_2000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/flame/flame__norm_0__mu_200__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/flame/flame__norm_0__mu_30__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/flame/flame__norm_0__mu_500__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/jain/jain__norm_0__mu_0__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/jain/jain__norm_0__mu_1000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/jain/jain__norm_0__mu_100__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/jain/jain__norm_0__mu_10__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/jain/jain__norm_0__mu_1__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/jain/jain__norm_0__mu_2000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/jain/jain__norm_0__mu_200__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/jain/jain__norm_0__mu_30__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/jain/jain__norm_0__mu_500__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_1000/origin_1000__norm_0__mu_0__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_1000/origin_1000__norm_0__mu_1000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_1000/origin_1000__norm_0__mu_100__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_1000/origin_1000__norm_0__mu_10__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_1000/origin_1000__norm_0__mu_1__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_1000/origin_1000__norm_0__mu_2000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_1000/origin_1000__norm_0__mu_200__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_1000/origin_1000__norm_0__mu_30__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_1000/origin_1000__norm_0__mu_500__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_4000/origin_4000__norm_0__mu_0__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_4000/origin_4000__norm_0__mu_1000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_4000/origin_4000__norm_0__mu_100__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_4000/origin_4000__norm_0__mu_10__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_4000/origin_4000__norm_0__mu_1__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_4000/origin_4000__norm_0__mu_2000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_4000/origin_4000__norm_0__mu_200__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_4000/origin_4000__norm_0__mu_30__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/origin_4000/origin_4000__norm_0__mu_500__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/pathbased/pathbased__norm_0__mu_0__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/pathbased/pathbased__norm_0__mu_1000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/pathbased/pathbased__norm_0__mu_100__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/pathbased/pathbased__norm_0__mu_10__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/pathbased/pathbased__norm_0__mu_1__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/pathbased/pathbased__norm_0__mu_2000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/pathbased/pathbased__norm_0__mu_200__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/pathbased/pathbased__norm_0__mu_30__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/pathbased/pathbased__norm_0__mu_500__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/spiral/spiral__norm_0__mu_0__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/spiral/spiral__norm_0__mu_1000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/spiral/spiral__norm_0__mu_100__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/spiral/spiral__norm_0__mu_10__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/spiral/spiral__norm_0__mu_1__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/spiral/spiral__norm_0__mu_2000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/spiral/spiral__norm_0__mu_200__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/spiral/spiral__norm_0__mu_30__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/spiral/spiral__norm_0__mu_500__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/test/test__norm_0__mu_0__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/test/test__norm_0__mu_1000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/test/test__norm_0__mu_100__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/test/test__norm_0__mu_10__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/test/test__norm_0__mu_1__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/test/test__norm_0__mu_2000__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/test/test__norm_0__mu_200__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/test/test__norm_0__mu_30__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/experiment/demo/test/test__norm_0__mu_500__sigma_0.7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/raw/demo/test.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/raw/uci/Isolet/Index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/raw/uci/Isolet/isolet.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/raw/uci/Isolet/isolet.names" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/raw/uci/Isolet/isolet1+2+3+4.data" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataSet/raw/uci/Isolet/isolet5.data" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://F:/python3/Lib/site-packages/sklearn/metrics/_classification.py" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2GtsV52ZbmBywJEz8aBqQlHxj6I" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/坚果云/我的坚果云/now/ky/thesis/thesisCodes",
+    "settings.editor.selected.configurable": "editor.preferences.pyOptions"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\坚果云\我的坚果云\now\ky\thesis\thesisCodes\dataSet\raw\uci\COIL100" />
+      <recent name="D:\坚果云\我的坚果云\now\ky\thesis\thesisCodes\dataSet\experiment" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.experiment">
+    <configuration name="deal" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="thesisCodes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/codes/research" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/codes/research/deal.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="dpcp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="thesisCodes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/codes/research" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/codes/research/dpcp.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="dpcs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="thesisCodes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/codes/research" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/codes/research/dpcs.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="experiment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="thesisCodes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/codes/research" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/codes/research/experiment.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="thesisCodes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/codes/research" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/codes/research/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.experiment" />
+        <item itemvalue="Python.dpcp" />
+        <item itemvalue="Python.deal" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.dpcs" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d309d47c-83a3-462c-a361-c6266b368ab3" name="Changes" comment="" />
+      <created>1667219236697</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667219236697</updated>
+      <workItem from="1667219240251" duration="111000" />
+      <workItem from="1667219998847" duration="535000" />
+      <workItem from="1667220558145" duration="5111000" />
+      <workItem from="1667268613221" duration="1958000" />
+      <workItem from="1667285764547" duration="6865000" />
+      <workItem from="1667296154270" duration="621000" />
+      <workItem from="1667309421922" duration="4539000" />
+      <workItem from="1667351157580" duration="5481000" />
+      <workItem from="1667373947948" duration="5264000" />
+      <workItem from="1667395393845" duration="1765000" />
+      <workItem from="1667457450873" duration="5593000" />
+      <workItem from="1667468899314" duration="5000" />
+      <workItem from="1667473640538" duration="9436000" />
+      <workItem from="1667528744410" duration="1714000" />
+      <workItem from="1667560588556" duration="1469000" />
+      <workItem from="1667615013927" duration="3654000" />
+      <workItem from="1667641551710" duration="3694000" />
+      <workItem from="1667722393553" duration="6130000" />
+      <workItem from="1667737671406" duration="6155000" />
+      <workItem from="1667787729880" duration="8904000" />
+      <workItem from="1667816635479" duration="1192000" />
+      <workItem from="1667891418990" duration="1363000" />
+      <workItem from="1667904696247" duration="595000" />
+      <workItem from="1667960212391" duration="639000" />
+      <workItem from="1667977860787" duration="1795000" />
+      <workItem from="1667999936358" duration="622000" />
+      <workItem from="1668063204719" duration="2646000" />
+      <workItem from="1668076191122" duration="7448000" />
+      <workItem from="1668133978315" duration="977000" />
+      <workItem from="1668155045792" duration="4928000" />
+      <workItem from="1668162971346" duration="5498000" />
+      <workItem from="1668220076141" duration="4232000" />
+      <workItem from="1668311021404" duration="5425000" />
+      <workItem from="1668389966096" duration="4694000" />
+      <workItem from="1668400744302" duration="24256000" />
+      <workItem from="1668475394816" duration="25846000" />
+      <workItem from="1668562401230" duration="18192000" />
+      <workItem from="1668649863768" duration="21417000" />
+      <workItem from="1668736609862" duration="7818000" />
+      <workItem from="1668825697952" duration="9537000" />
+      <workItem from="1668917491739" duration="14716000" />
+      <workItem from="1668991147934" duration="37487000" />
+      <workItem from="1669081358671" duration="1227000" />
+      <workItem from="1669082873078" duration="1184000" />
+      <workItem from="1669085951722" duration="2419000" />
+      <workItem from="1669105245899" duration="10937000" />
+      <workItem from="1669186553470" duration="2301000" />
+      <workItem from="1669189221872" duration="26000" />
+      <workItem from="1669637506493" duration="483000" />
+    </task>
+    <task id="LOCAL-00001" summary="dpc base class">
+      <created>1667742565744</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667742565744</updated>
+    </task>
+    <task id="LOCAL-00002" summary="dpc base class build">
+      <created>1668437501495</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1668437501495</updated>
+    </task>
+    <task id="LOCAL-00003" summary="some data">
+      <created>1668437543125</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1668437543125</updated>
+    </task>
+    <task id="LOCAL-00004" summary="dpc p">
+      <created>1668523542796</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1668523542796</updated>
+    </task>
+    <task id="LOCAL-00005" summary="dpcp">
+      <created>1668650991589</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1668650991589</updated>
+    </task>
+    <task id="LOCAL-00006" summary="deal_">
+      <created>1668697307165</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668697307165</updated>
+    </task>
+    <task id="LOCAL-00007" summary="deal ++">
+      <created>1669188695706</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1669188695706</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="dpc base class" />
+    <MESSAGE value="dpc base class build" />
+    <MESSAGE value="some data" />
+    <MESSAGE value="dpc p" />
+    <MESSAGE value="dpcp" />
+    <MESSAGE value="deal_" />
+    <MESSAGE value="deal ++" />
+    <option name="LAST_COMMIT_MESSAGE" value="deal ++" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/thesisCodes$dpcs.coverage" NAME="dpcs Coverage Results" MODIFIED="1668477103858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/codes/research" />
+    <SUITE FILE_PATH="coverage/thesisCodes$experiment.coverage" NAME="experiment Coverage Results" MODIFIED="1669110165818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/codes/research" />
+    <SUITE FILE_PATH="coverage/thesisCodes$test.coverage" NAME="test Coverage Results" MODIFIED="1668737713918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/codes/research" />
+    <SUITE FILE_PATH="coverage/thesisCodes$dpc.coverage" NAME="dpc Coverage Results" MODIFIED="1668437684430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/codes/research" />
+    <SUITE FILE_PATH="coverage/thesisCodes$deal.coverage" NAME="deal Coverage Results" MODIFIED="1668737928147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/codes/research" />
+    <SUITE FILE_PATH="coverage/thesisCodes$dpcp.coverage" NAME="dpcp Coverage Results" MODIFIED="1669032353368" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/codes/research" />
+  </component>
+</project>
